@@ -39,10 +39,10 @@ const rest = new REST({ version: '10' }).setToken(token);
 (async () => {
     try {
         console.log('Registering slash commands...');
-        await rest.put(
-            Routes.applicationCommands(clientId),
-            { body: commands }
-        );
+        // For global commands (may take up to 1 hour to appear)
+        // await rest.put(Routes.applicationCommands(clientId), { body: commands });
+        // For instant guild commands (appear immediately)
+        await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands });
         console.log('Slash commands registered.');
     } catch (error) {
         console.error(error);

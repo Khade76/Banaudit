@@ -21,6 +21,15 @@ module.exports = {
         const serverId = interaction.options.getString('serverid');
         const bmToken = process.env.BM_API_TOKEN_BANEXPORT;
 
+        // Validate input
+        if (!steamId) {
+            await interaction.reply({
+                content: 'SteamID is required and was not provided.',
+                ephemeral: true
+            });
+            return;
+        }
+
         // BattleMetrics ban API endpoint
         const url = 'https://api.battlemetrics.com/bans';
 
