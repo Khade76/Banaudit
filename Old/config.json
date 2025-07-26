@@ -1,0 +1,6 @@
+{
+  "banTemplate": {
+    "reason": "Default reason",
+    "duration": 3600
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "BM_Bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "run": "node index.js",
+    "build": "npm i",
+    "test": "set NODE_ENV=test&& node index.js",
+    "deploy": "node deploy.js",
+    "tdeploy": "set NODE_ENV=test&& node deploy.js",
+    "format": "prettier --write .",
+    "listen": "set NODE_ENV=test&& nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "44th_dcbot": "file:",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1",
+    "express": "^5.1.0",
+    "googleapis": "^120.0.0",
+    "jsdom": "^22.1.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.11.3",
+    "node-windows": "^1.0.0-beta.8",
+    "p-limit": "^6.2.0"
+  },
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "prettier": "^3.5.3"
+  }
+}
