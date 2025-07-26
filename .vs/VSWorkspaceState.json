@@ -3,8 +3,9 @@
     "",
     "\\Admin",
     "\\commands",
-    "\\commands\\tools"
+    "\\commands\\tools",
+    "\\Old"
   ],
-  "SelectedNode": "\\index.js",
+  "SelectedNode": "\\Old\\package.json",
   "PreviewInSolutionExplorer": false
 }

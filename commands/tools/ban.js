@@ -71,6 +71,8 @@ module.exports = {
             }
 
             const result = await response.json();
+            const steamId = (result.data.attributes.identifiers || []).find(id => id.type?.toLowerCase() === 'steamid')?.identifier || 'Unknown';
+
             await interaction.reply({
                 content: `User with SteamID ${steamId} has been banned on server ${serverId} for: ${reason}`,
                 ephemeral: true
