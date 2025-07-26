@@ -31,7 +31,7 @@ module.exports = {
                 attributes: {
                     reason: reason,
                     identifiers: [
-                        { type: "steamID", identifier: steamId }
+                        { type: "steamid", identifier: steamId.toString() }
                     ]
                 },
                 relationships: {

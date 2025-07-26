@@ -1,6 +1,8 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const { Client, GatewayIntentBits } = require("discord.js");
+const { Client, GatewayIntentBits, REST, Routes } = require("discord.js");
+const fs = require('node:fs');
+const path = require('node:path');
 
 const envFile = process.env.NODE_ENV === "test" ? ".env.test" : ".env";
 dotenv.config({ path: envFile });
@@ -15,7 +17,39 @@ const port = process.env.PORT || 3000;
 // Express app for webhook listener
 const app = express();
 
+const clientId = process.env.CLIENTID;
 const token = process.env.TOKEN;
+const guildId = process.env.GUILD_ID; // If you want to register commands for a specific guild
+
+// Load all command files
+const commands = [];
+const commandsPath = path.join(__dirname, 'commands', 'tools');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+    const command = require(path.join(commandsPath, file));
+    if ('data' in command && 'execute' in command) {
+        commands.push(command.data.toJSON());
+    }
+}
+
+// Register commands with Discord
+const rest = new REST({ version: '10' }).setToken(token);
+
+(async () => {
+    try {
+        console.log('Registering slash commands...');
+        await rest.put(
+            Routes.applicationCommands(clientId),
+            { body: commands }
+        );
+        console.log('Slash commands registered.');
+    } catch (error) {
+        console.error(error);
+    }
+})();
+
+// Discord client
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -25,12 +59,7 @@ const client = new Client({
 });
 
 // Load only BM-related commands
-const fs = require("node:fs");
-const path = require("node:path");
 client.commands = new Map();
-
-const commandsPath = path.join(__dirname, "commands", "tools");
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith(".js"));
 
 for (const file of commandFiles) {
     const filePath = path.join(commandsPath, file);
