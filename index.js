@@ -1,6 +1,5 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const path = require("node:path");
 const { Client, GatewayIntentBits } = require("discord.js");
 
 const envFile = process.env.NODE_ENV === "test" ? ".env.test" : ".env";
@@ -27,41 +26,20 @@ const client = new Client({
 
 // Load only BM-related commands
 const fs = require("node:fs");
+const path = require("node:path");
 client.commands = new Map();
 
-// Load all commands from the commands directory as before
-const foldersPath = path.join(__dirname, "commands");
-const commandFolders = fs.readdirSync(foldersPath);
-for (const folder of commandFolders) {
-    const subfoldersPath = path.join(foldersPath, folder);
-    const subFolders = fs.readdirSync(subfoldersPath);
-    for (const sub_folder of subFolders) {
-        if (sub_folder.endsWith(".js")) {
-            const filePath = path.join(subfoldersPath, sub_folder);
-            const command = require(filePath);
-            if ("data" in command && "execute" in command) {
-                client.commands.set(command.data.name, command);
-            }
-        } else {
-            const sub_subfoldersPath = path.join(subfoldersPath, sub_folder);
-            const commandFiles = fs
-                .readdirSync(sub_subfoldersPath)
-                .filter((file) => file.endsWith(".js"));
-            for (const file of commandFiles) {
-                const filePath = path.join(sub_subfoldersPath, file);
-                const command = require(filePath);
-                if ("data" in command && "execute" in command) {
-                    client.commands.set(command.data.name, command);
-                }
-            }
-        }
-    }
-}
+const commandsPath = path.join(__dirname, "commands", "tools");
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith(".js"));
 
-// --- Explicitly add addbmuser command ---
-const addbmuser = require('./commands/tools/addbmuser.js');
-if ("data" in addbmuser && "execute" in addbmuser) {
-    client.commands.set(addbmuser.data.name, addbmuser);
+for (const file of commandFiles) {
+    const filePath = path.join(commandsPath, file);
+    const command = require(filePath);
+    if ("data" in command && "execute" in command) {
+        client.commands.set(command.data.name, command);
+    } else {
+        console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+    }
 }
 
 // Handle execution of BM commands
@@ -83,7 +61,7 @@ client.on("interactionCreate", async (interaction) => {
                 content: "There was an error while executing this command!",
                 ephemeral: true,
             });
-        }   
+        }
     }
 });
 

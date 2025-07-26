@@ -3,7 +3,9 @@
     "",
     "\\Admin",
     "\\commands",
-    "\\commands\\tools"
+    "\\commands\\tools",
+    "\\Old"
   ],
+  "SelectedNode": "\\commands\\tools\\addbmuser.js",
   "PreviewInSolutionExplorer": false
 }

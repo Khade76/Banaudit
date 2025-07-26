@@ -1,14 +1,15 @@
-const {
-    SlashCommandBuilder,
-} = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
+const fetch = require("node-fetch");
+require("dotenv").config();
 
-// Replace with your actual BattleMetrics API logic
-async function addUserToBMOrganisation(bmUserId, bmRole) {
-    // Example: Use fetch or axios to call BM API
-    // return await fetch('https://api.battlemetrics.com/organisations/xxx/users', { ... });
-    // For now, simulate success:
-    return { success: true };
-}
+const BM_ROLES = [
+    { name: "Helper", value: "Helper" },
+    { name: "Admin", value: "Admin" },
+    { name: "Moderator", value: "Moderator" },
+    { name: "Gym Trainer", value: "Gym Trainer" },
+    { name: "R&E", value: "R&E" },
+    { name: "Senior Trainer", value: "Senior Trainer" }
+];
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -26,6 +27,19 @@ module.exports = {
                 .setDescription("BattleMetrics User ID")
                 .setRequired(true)
         )
+        .addStringOption(option =>
+            option
+                .setName("email")
+                .setDescription("User's email address")
+                .setRequired(true)
+        )
+        .addStringOption(option =>
+            option
+                .setName("bmrole")
+                .setDescription("BattleMetrics role to assign")
+                .setRequired(true)
+                .addChoices(...BM_ROLES)
+        )
         .addRoleOption(option =>
             option
                 .setName("role")
@@ -36,26 +50,73 @@ module.exports = {
     async execute(interaction) {
         const discordUser = interaction.options.getUser("user");
         const bmUserId = interaction.options.getString("bmuserid");
+        const email = interaction.options.getString("email");
+        const bmRole = interaction.options.getString("bmrole");
         const discordRole = interaction.options.getRole("role");
 
-        // Add user to BM organisation
-        const bmResult = await addUserToBMOrganisation(bmUserId, discordRole.name);
+        const bmToken = process.env.BM_API_TOKEN_BANEXPORT;
+        const orgId = process.env.BM_ORG_ID;
 
-        if (!bmResult.success) {
+        if (!bmToken || !orgId) {
             await interaction.reply({
-                content: "Failed to add user to BattleMetrics organisation.",
+                content: "BattleMetrics API token or organization ID is missing in .env.",
                 ephemeral: true,
             });
             return;
         }
 
-        // Assign Discord role
-        const member = await interaction.guild.members.fetch(discordUser.id);
-        await member.roles.add(discordRole);
+        // BattleMetrics API call to add user to organization
+        const url = `https://api.battlemetrics.com/organizations/${orgId}/users`;
+        const payload = {
+            data: {
+                type: "organizationUser",
+                attributes: {
+                    role: bmRole,
+                    email: email
+                },
+                relationships: {
+                    user: {
+                        data: {
+                            type: "user",
+                            id: bmUserId
+                        }
+                    }
+                }
+            }
+        };
 
-        await interaction.reply({
-            content: `Added <@${discordUser.id}> to BM organisation and assigned role <@&${discordRole.id}>.`,
-            ephemeral: true,
-        });
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${bmToken}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                await interaction.reply({
+                    content: `Failed to add user to BattleMetrics organization: ${errorText}`,
+                    ephemeral: true,
+                });
+                return;
+            }
+
+            // Assign Discord role
+            const member = await interaction.guild.members.fetch(discordUser.id);
+            await member.roles.add(discordRole);
+
+            await interaction.reply({
+                content: `Added <@${discordUser.id}> to BattleMetrics organization as ${bmRole} and assigned role <@&${discordRole.id}>.`,
+                ephemeral: true,
+            });
+        } catch (error) {
+            await interaction.reply({
+                content: `Error adding user to BattleMetrics organization: ${error.message}`,
+                ephemeral: true,
+            });
+        }
     },
 };
