@@ -3,9 +3,8 @@
     "",
     "\\Admin",
     "\\commands",
-    "\\commands\\tools",
-    "\\Old"
+    "\\commands\\tools"
   ],
-  "SelectedNode": "\\commands\\tools\\addbmuser.js",
+  "SelectedNode": "\\package.json",
   "PreviewInSolutionExplorer": false
 }

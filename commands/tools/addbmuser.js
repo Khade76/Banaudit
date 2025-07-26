@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const fetch = require("node-fetch");
+const axios = require("axios");
 require("dotenv").config();
 
 const BM_ROLES = [
@@ -86,23 +86,12 @@ module.exports = {
         };
 
         try {
-            const response = await fetch(url, {
-                method: "POST",
+            const response = await axios.post(url, payload, {
                 headers: {
                     "Authorization": `Bearer ${bmToken}`,
                     "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
+                }
             });
-
-            if (!response.ok) {
-                const errorText = await response.text();
-                await interaction.reply({
-                    content: `Failed to add user to BattleMetrics organization: ${errorText}`,
-                    ephemeral: true,
-                });
-                return;
-            }
 
             // Assign Discord role
             const member = await interaction.guild.members.fetch(discordUser.id);

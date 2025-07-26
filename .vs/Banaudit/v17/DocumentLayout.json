@@ -3,20 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\dazzy\\source\\repos\\Khade76\\Banaudit\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\dazzy\\source\\repos\\Khade76\\Banaudit\\commands\\tools\\addbmuser.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:commands\\tools\\addbmuser.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\dazzy\\source\\repos\\Khade76\\Banaudit\\commands\\tools\\unban.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:commands\\tools\\unban.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\dazzy\\source\\repos\\Khade76\\Banaudit\\index.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:index.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\dazzy\\source\\repos\\Khade76\\Banaudit\\commands\\tools\\banpoll.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:commands\\tools\\banpoll.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\dazzy\\source\\repos\\Khade76\\Banaudit\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,53 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "addbmuser.js",
-              "DocumentMoniker": "C:\\Users\\dazzy\\source\\repos\\Khade76\\Banaudit\\commands\\tools\\addbmuser.js",
-              "RelativeDocumentMoniker": "commands\\tools\\addbmuser.js",
-              "ToolTip": "C:\\Users\\dazzy\\source\\repos\\Khade76\\Banaudit\\commands\\tools\\addbmuser.js",
-              "RelativeToolTip": "commands\\tools\\addbmuser.js",
-              "ViewState": "AgIAAD8AAAAAAAAAAAD4vxQAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-07-26T17:01:56.429Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "unban.js",
-              "DocumentMoniker": "C:\\Users\\dazzy\\source\\repos\\Khade76\\Banaudit\\commands\\tools\\unban.js",
-              "RelativeDocumentMoniker": "commands\\tools\\unban.js",
-              "ToolTip": "C:\\Users\\dazzy\\source\\repos\\Khade76\\Banaudit\\commands\\tools\\unban.js",
-              "RelativeToolTip": "commands\\tools\\unban.js",
-              "ViewState": "AgIAABQAAAAAAAAAAAAAADsAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-07-26T16:59:59.113Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "banpoll.js",
-              "DocumentMoniker": "C:\\Users\\dazzy\\source\\repos\\Khade76\\Banaudit\\commands\\tools\\banpoll.js",
-              "RelativeDocumentMoniker": "commands\\tools\\banpoll.js",
-              "ToolTip": "C:\\Users\\dazzy\\source\\repos\\Khade76\\Banaudit\\commands\\tools\\banpoll.js",
-              "RelativeToolTip": "commands\\tools\\banpoll.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-07-26T16:59:20.069Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "index.js",
-              "DocumentMoniker": "C:\\Users\\dazzy\\source\\repos\\Khade76\\Banaudit\\index.js",
-              "RelativeDocumentMoniker": "index.js",
-              "ToolTip": "C:\\Users\\dazzy\\source\\repos\\Khade76\\Banaudit\\index.js",
-              "RelativeToolTip": "index.js",
-              "ViewState": "AgIAABkAAAAAAAAAAAAhwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-07-26T16:58:36.632Z",
+              "Title": "package.json",
+              "DocumentMoniker": "C:\\Users\\dazzy\\source\\repos\\Khade76\\Banaudit\\package.json",
+              "RelativeDocumentMoniker": "package.json",
+              "ToolTip": "C:\\Users\\dazzy\\source\\repos\\Khade76\\Banaudit\\package.json",
+              "RelativeToolTip": "package.json",
+              "ViewState": "AgIAAAEAAAAAAAAAAADgvw0AAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-26T17:09:56.149Z",
               "EditorCaption": ""
             }
           ]
