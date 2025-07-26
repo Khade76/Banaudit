@@ -27,36 +27,41 @@ const client = new Client({
 
 // Load only BM-related commands
 const fs = require("node:fs");
-const foldersPath = path.join(__dirname, "commands");
-const commandFolders = fs.readdirSync(foldersPath);
 client.commands = new Map();
 
+// Load all commands from the commands directory as before
+const foldersPath = path.join(__dirname, "commands");
+const commandFolders = fs.readdirSync(foldersPath);
 for (const folder of commandFolders) {
-    if (folder.toLowerCase().includes("bm")) { // Only load BM-related commands
-        const subfoldersPath = path.join(foldersPath, folder);
-        const subFolders = fs.readdirSync(subfoldersPath);
-        for (const sub_folder of subFolders) {
-            if (sub_folder.endsWith(".js")) {
-                const filePath = path.join(subfoldersPath, sub_folder);
+    const subfoldersPath = path.join(foldersPath, folder);
+    const subFolders = fs.readdirSync(subfoldersPath);
+    for (const sub_folder of subFolders) {
+        if (sub_folder.endsWith(".js")) {
+            const filePath = path.join(subfoldersPath, sub_folder);
+            const command = require(filePath);
+            if ("data" in command && "execute" in command) {
+                client.commands.set(command.data.name, command);
+            }
+        } else {
+            const sub_subfoldersPath = path.join(subfoldersPath, sub_folder);
+            const commandFiles = fs
+                .readdirSync(sub_subfoldersPath)
+                .filter((file) => file.endsWith(".js"));
+            for (const file of commandFiles) {
+                const filePath = path.join(sub_subfoldersPath, file);
                 const command = require(filePath);
                 if ("data" in command && "execute" in command) {
                     client.commands.set(command.data.name, command);
                 }
-            } else {
-                const sub_subfoldersPath = path.join(subfoldersPath, sub_folder);
-                const commandFiles = fs
-                    .readdirSync(sub_subfoldersPath)
-                    .filter((file) => file.endsWith(".js"));
-                for (const file of commandFiles) {
-                    const filePath = path.join(sub_subfoldersPath, file);
-                    const command = require(filePath);
-                    if ("data" in command && "execute" in command) {
-                        client.commands.set(command.data.name, command);
-                    }
-                }
             }
         }
     }
+}
+
+// --- Explicitly add addbmuser command ---
+const addbmuser = require('./commands/tools/addbmuser.js');
+if ("data" in addbmuser && "execute" in addbmuser) {
+    client.commands.set(addbmuser.data.name, addbmuser);
 }
 
 // Handle execution of BM commands
